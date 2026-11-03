@@ -21,13 +21,32 @@ android {
         }
     }
 
+    // Release signing lives outside the repo: ~/.gradle/gradle.properties
+    // holds qrscanner.keystore.path / .password / key.alias / key.password.
+    val releaseKeystorePath = (findProperty("qrscanner.keystore.path") as String?).orEmpty()
+    val hasReleaseKey = releaseKeystorePath.isNotEmpty() && file(releaseKeystorePath).exists()
+    if (hasReleaseKey) {
+        signingConfigs {
+            create("release") {
+                storeFile = file(releaseKeystorePath)
+                storePassword = findProperty("qrscanner.keystore.password") as String?
+                keyAlias = findProperty("qrscanner.key.alias") as String?
+                keyPassword = findProperty("qrscanner.key.password") as String?
+            }
+        }
+    }
+
     buildTypes {
         release {
-            // Personal-use signing: reuses the debug key so the release APK
-            // can be sideloaded immediately. For store publishing, create a
-            // real keystore, add a signingConfigs.release block, and point
-            // this build type at it instead.
-            signingConfig = signingConfigs.getByName("debug")
+            // Signed with the personal release keystore when its credentials
+            // are present (~/.gradle/gradle.properties on the author's
+            // machine). Anyone else cloning the repo falls back to the debug
+            // key so assembleRelease still works for them.
+            signingConfig = if (hasReleaseKey) {
+                signingConfigs.getByName("release")
+            } else {
+                signingConfigs.getByName("debug")
+            }
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),

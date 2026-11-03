@@ -3,6 +3,18 @@
 A premium, privacy-first native Android QR code scanner. No account, no ads,
 no analytics, no tracking — scanning runs fully offline on the device.
 
+## Install (no Play Store needed)
+
+1. Download **QR-Scanner-v1.0.0.apk** from the
+   [latest release](https://github.com/JustABeing00/QR-Code-Scanner/releases/latest)
+   — or scan this with any QR scanner:
+
+   ![Install QR](docs/install-qr.png)
+
+2. Open the downloaded file on your phone and allow **"Install unknown apps"**
+   when Android asks (a one-time prompt).
+3. Future updates install the same way, with no data loss.
+
 ## Features
 
 - **Instant camera scanning** — CameraX + on-device ML Kit barcode model,
