@@ -9,7 +9,7 @@ no analytics, no tracking — scanning runs fully offline on the device.
    [latest release](https://github.com/JustABeing00/QR-Code-Scanner/releases/latest)
    — or scan this with any QR scanner:
 
-   ![Install QR](docs/install-qr.png)
+   <img src="docs/install-qr.png" width="280" alt="Install QR">
 
 2. Open the downloaded file on your phone and allow **"Install unknown apps"**
    when Android asks (a one-time prompt).
