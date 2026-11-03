@@ -10,8 +10,8 @@ local.properties
 captures/
 
 # Keystores (never commit release keys)
-/*.jks
-/*.keystore
+*.jks
+*.keystore
 
 # OS
 .DS_Store
